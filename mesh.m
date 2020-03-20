@@ -12,10 +12,11 @@ clear;
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 % Set global parameters
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-animate = 0;            % animate (1) or don't animate (0) the membrane
-Lx = 1;                 % x-width of membrane (m)
-Ly = 1;                 % y-width of membrane (m)
+animate = 1;            % animate (1) or don't animate (0) the membrane
+Lx = 5;                 % x-width of membrane (m)
+Ly = 5;                 % y-width of membrane (m)
 c = 2540;               % speed of sound in Mylar (membrane material) (m/s)
+%c = 5960;               % speed of sound in Steel (membrane material) (m/s)
 dur = 0.5;              % duration of simulation (seconds)
 fs = 44100;             % sampling rate (Hz)
 Ns = dur * fs;          % duration of simulation (samples)
@@ -30,7 +31,7 @@ yi = ceil(Njy/2);       % junction along y receiving input excitation
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 % Define input signal
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-x = [1; zeros(Ns-1,1)];
+x = [-0.5; zeros(Ns-1,1)];
 
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 % Set model parameters
@@ -169,6 +170,16 @@ end
 % Listen to output signal
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 soundsc(y,fs);
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%
+% Save simulation as .wav file
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%
+
+% Define filename. Include parameter values in filename.
+filename = 'mus206ts_mesh.wav';
+
+% Write .wav file to MATLAB pwd at 16 bits
+audiowrite(filename, y*1.5, fs, 'BitsPerSample', 16);
 
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 % Plot time- and frequency-domain representations of y
