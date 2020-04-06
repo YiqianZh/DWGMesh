@@ -6,7 +6,7 @@ let zscl = 100000.0;
 //------------------------------------------------------------------------------
 preload = function()
 {
-  shdr = loadShader('shaders/vert.shader', 'shaders/frag.shader');
+  shdr = loadShader('/js/shaders/vert.shader', '/js/shaders/frag.shader');
 };
 //------------------------------------------------------------------------------
 function setup()
